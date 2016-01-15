@@ -1,0 +1,15 @@
+<h2><%= @food_truck.name %>: FOOD LIST  </h2>
+
+<ul>
+<% @foods.each do |a| %>
+  <li>
+  <%= a.name %>
+  <%= link_to "Show", food_truck_food_path(@food_truck,a)%>
+  <%= link_to "Edit", edit_food_truck_food_path(@food_truck,a)%>
+  <%= link_to "Delete", food_truck_food_path(@food_truck,a),:method => :delete,:data =>{:confirm => "Are you sure?"} %>
+  </li>
+<% end %>
+</ul>
+
+<%= link_to "New food",new_food_truck_food_path(@food_truck)%>
+<%= link_to 'Back', food_trucks_path %>

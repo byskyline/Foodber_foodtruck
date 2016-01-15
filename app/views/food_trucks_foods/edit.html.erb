@@ -1,0 +1,8 @@
+<%= form_for @food, :url => food_truck_food_path(@food_truck,@food), :method => :patch do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
+
+<% end %>

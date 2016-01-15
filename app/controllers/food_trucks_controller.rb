@@ -4,7 +4,7 @@ class FoodTrucksController < ApplicationController
   # GET /food_trucks
   # GET /food_trucks.json
   def index
-    @food_trucks = FoodTruck.all
+    @food_trucks = FoodTruck.page(params[:page]).per(3)
   end
 
   # GET /food_trucks/1

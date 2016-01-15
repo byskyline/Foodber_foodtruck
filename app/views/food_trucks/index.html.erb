@@ -28,6 +28,7 @@
          <% end %>
         </td>
         <td><%= link_to 'Show', food_truck_path(f) %></td>
+        <td><%= link_to 'Food', food_truck_foods_path(f)%></td>
         <td><%= link_to 'Edit', edit_food_truck_path(f) %></td>
         <td><%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -38,3 +39,5 @@
 <br>
 
 <%= link_to 'New Food truck', new_food_truck_path %>
+
+<%= paginate @food_trucks %>
