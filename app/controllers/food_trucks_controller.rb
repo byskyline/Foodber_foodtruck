@@ -40,6 +40,10 @@ class FoodTrucksController < ApplicationController
   # PATCH/PUT /food_trucks/1
   # PATCH/PUT /food_trucks/1.json
   def update
+    if params[:_remove_picture] == "1"
+      @food_truck.picture = nil
+    end
+
     respond_to do |format|
       if @food_truck.update(food_truck_params)
         format.html { redirect_to @food_truck, notice: 'Food truck was successfully updated.' }
