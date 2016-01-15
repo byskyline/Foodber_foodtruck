@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @food_truck.name %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @food_truck.longitude %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @food_truck.latitude %>
+</p>
+<p>
+  <% if @food_truck.picture.exists? %>
+    <%= image_tag(@food_truck.picture.url)%>
+  <% else %>
+    None
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_food_truck_path(@food_truck) %> |
+<%= link_to 'Back', food_trucks_path %>

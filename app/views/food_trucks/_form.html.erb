@@ -1,0 +1,32 @@
+<%= form_for(@food_truck) do |f| %>
+  <% if @food_truck.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@food_truck.errors.count, "error") %> prohibited this food_truck from being saved:</h2>
+
+      <ul>
+      <% @food_truck.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :longitude %><br>
+    <%= f.text_field :longitude %>
+  </div>
+  <div class="field">
+    <%= f.label :latitude %><br>
+    <%= f.text_field :latitude %>
+  </div>
+  <div class="field">
+    <%= f.file_field :picture %><br>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
