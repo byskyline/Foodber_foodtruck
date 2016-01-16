@@ -1,3 +1,12 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 <%= form_for(@food_truck) do |f| %>
   <% if @food_truck.errors.any? %>
     <div id="error_explanation">
@@ -11,23 +20,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+
+
+  <div class="form-group">
+    <%= f.label :name ,"餐車名稱： "%>
+    <%= f.text_field :name ,:class => "form-control"%>
   </div>
-  <div class="field">
-    <%= f.label :longitude %><br>
-    <%= f.text_field :longitude %>
+  <div class="form-group">
+    <%= f.label :longitude %>
+    <%= f.text_field :longitude , :class => "form-control"%>
   </div>
-  <div class="field">
-    <%= f.label :latitude %><br>
-    <%= f.text_field :latitude %>
+  <div class="form-group">
+    <%= f.label :latitude %>
+    <%= f.text_field :latitude , :class => "form-control"%>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.file_field :picture %><br>
     <%= check_box_tag "_remove_picture","1"%> Remove Picture
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+   <td> <%= f.submit  "新增檔案", :class =>"btn btn-primary"%></td>
+
 <% end %>
+
+
+
+
+
+

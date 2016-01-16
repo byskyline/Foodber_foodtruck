@@ -1,25 +1,43 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Foodber</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<h1>Listing Food Trucks</h1>
+</head>
+<body>
+<h1>Foodber</h1>
 
-<table>
-  <thead>
+<p><%= image_tag "logo.png", size: "1100x600" %></p>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.4629396835726!2d121.53007031490976!3d25.05229384371203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a96126e64fb7%3A0xe844420ac13b2cb1!2sALPHA+Camp!5e0!3m2!1szh-TW!2stw!4v1451752199236" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+
+
+
+
+<table class="table">
+
     <tr>
-      <th>Name</th>
-      <th>Longitude</th>
-      <th>Latitude</th>
-      <th>Picture</th>
-      <th colspan="3"></th>
+      <td>餐車名稱</td>
+      <td>Longitude</td>
+      <td>Latitude</td>
+      <td>餐車圖片</td>
+      <td>餐車餐點詳細內容</td>
+      <td>其他功能</td>
     </tr>
-  </thead>
 
-  <tbody>
+
+  <tr>
     <% @food_trucks.each do |f| %>
-      <tr>
+
         <td><%= f.name %></td>
         <td><%= f.longitude %></td>
         <td><%= f.latitude %></td>
-
         <td>
          <% if f.picture.exists? %>
           <%= image_tag(f.picture.url(:medium))%>
@@ -27,17 +45,27 @@
           None
          <% end %>
         </td>
-        <td><%= link_to 'Show', food_truck_path(f) %></td>
-        <td><%= link_to 'Food', food_truck_foods_path(f)%></td>
-        <td><%= link_to 'Edit', edit_food_truck_path(f) %></td>
-        <td><%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '更多詳情', food_truck_foods_path(f)%></td>
+        <td><%= link_to 'Show', food_truck_path(f) , :class=> "btn btn-primary"%></td>
+        <td><%= link_to 'Edit', edit_food_truck_path(f), :class=> "btn btn-default" %></td>
+        <td><%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger" %></td>
       </tr>
     <% end %>
-  </tbody>
+
 </table>
 
 <br>
 
-<%= link_to 'New Food truck', new_food_truck_path %>
+<p><%= link_to '新增餐車', new_food_truck_path,:class=>"btn btn-primary" %></p>
+
+
+  <ul class="pagination">
+
+    <li><a href=" <%=paginate @food_trucks %>"></a></li>
+
+  </ul>
 
 <%= paginate @food_trucks %>
+
+</body>
+</html>

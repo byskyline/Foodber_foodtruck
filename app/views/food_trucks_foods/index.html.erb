@@ -1,15 +1,32 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 <h2><%= @food_truck.name %>: FOOD LIST  </h2>
+<table class="table">
+  <tr>
+    <td>餐點名稱</td>
+    <td>餐點價格</td>
+  </tr>
+  <tr>
+    <% @foods.each do |a| %>
+    <td><%= a.name %></td>
+    <td><%= a.price %></td>
+    <td><%= link_to "Show", food_truck_food_path(@food_truck,a), :class=> "btn btn-primary"%></td>
+    <td><%= link_to "Edit", edit_food_truck_food_path(@food_truck,a), :class=> "btn btn-default"%></td>
+    <td><%= link_to "Delete", food_truck_food_path(@food_truck,a),:method => :delete,:data =>{:confirm => "Are you sure?"} , :class=> "btn btn-danger"%></td>
+  </tr>
+    <% end %>
 
-<ul>
-<% @foods.each do |a| %>
-  <li>
-  <%= a.name %>
-  <%= link_to "Show", food_truck_food_path(@food_truck,a)%>
-  <%= link_to "Edit", edit_food_truck_food_path(@food_truck,a)%>
-  <%= link_to "Delete", food_truck_food_path(@food_truck,a),:method => :delete,:data =>{:confirm => "Are you sure?"} %>
-  </li>
-<% end %>
-</ul>
+</table>
 
-<%= link_to "New food",new_food_truck_food_path(@food_truck)%>
-<%= link_to 'Back', food_trucks_path %>
+<%= link_to "增加新餐點",new_food_truck_food_path(@food_truck),:class=>"btn btn-primary"%>
+<%= link_to '回到首頁', food_trucks_path ,:class=>"btn btn-primary"%>
+
+
+
