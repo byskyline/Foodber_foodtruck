@@ -37,17 +37,22 @@ class FoodTrucksFoodsController < ApplicationController
 
   def update
     @food = @food_truck.foods.find(params[:id])
+    if params[:_remove_picture] == "1"
+      @food.picture = nil
+    end
     if @food.update(food_params)
       redirect_to food_truck_foods_path(@food_truck)
     else
       render :action => "edit"
     end
+
+
   end
 
   protected
 
   def food_params
-    params.require(:food).permit(:name ,:price)
+    params.require(:food).permit(:name ,:price,:picture)
   end
 
   def set_food_truck

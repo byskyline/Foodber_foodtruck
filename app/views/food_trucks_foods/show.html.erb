@@ -4,5 +4,12 @@
 
 <h2><%= @food.name %></h2>
 <h2><%= @food.price %></h2>
+<p>
+  <% if @food.picture.exists? %>
+    <%= image_tag(@food.picture.url)%>
+  <% else %>
+    None
+  <% end %>
+</p>
 
 <%= link_to "Back to index" ,food_truck_foods_path(@food_truck), :class =>"btn btn-primary" %>

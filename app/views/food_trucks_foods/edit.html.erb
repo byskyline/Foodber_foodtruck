@@ -10,6 +10,10 @@
     <%= f.label :price ,"餐點價格： "%>
     <%= f.text_field :price ,:class => "form-control"%>
   </div>
+  <div class="form-group">
+    <%= f.file_field :picture %><br>
+    <%= check_box_tag "_remove_picture","1"%> Remove Picture
+  </div>
   <%= f.submit "更新餐點", :class =>"btn btn-primary"%>
 
 <% end %>
