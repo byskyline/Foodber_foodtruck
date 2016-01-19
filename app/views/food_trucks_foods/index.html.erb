@@ -1,0 +1,31 @@
+<h2><%= @food_truck.name %>: 餐車 MENU  </h2>
+<table class="table">
+  <tr>
+    <td>餐點名稱</td>
+    <td>餐點價格</td>
+    <td>餐點圖片</td>
+  </tr>
+  <tr>
+    <% @foods.each do |a| %>
+    <td><%= a.name %></td>
+    <td><%= a.price %></td>
+    <td>
+      <% if a.picture.exists? %>
+      <%= image_tag(a.picture.url(:medium))%>
+      <% else %>
+      None
+      <% end %>
+    </td>
+    <td><%= link_to "Show", food_truck_food_path(@food_truck,a), :class=> "btn btn-primary"%></td>
+    <td><%= link_to "Edit", edit_food_truck_food_path(@food_truck,a), :class=> "btn btn-default"%></td>
+    <td><%= link_to "Delete", food_truck_food_path(@food_truck,a),:method => :delete,:data =>{:confirm => "Are you sure?"} , :class=> "btn btn-danger"%></td>
+  </tr>
+    <% end %>
+
+</table>
+
+<%= link_to "增加新餐點",new_food_truck_food_path(@food_truck),:class=>"btn btn-primary"%>
+<%= link_to '回到首頁', food_trucks_path ,:class=>"btn btn-primary"%>
+
+
+

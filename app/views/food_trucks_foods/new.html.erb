@@ -1,0 +1,20 @@
+
+
+<%= form_for @food, :url => food_truck_foods_path(@food_truck) do |f| %>
+
+
+<div class="form-group">
+  <%= f.label :name, "餐點名稱： " %>
+  <%= f.text_field :name, :class => "form-control" %>
+</div>
+<div class="form-group">
+  <%= f.label :price ,"價格："%>
+  <%= f.text_field :price , :class => "form-control"%>
+</div>
+<div class="form-group">
+  <%= f.file_field :picture %><br>
+</div>
+  <%= f.submit "新增餐點" , :class =>"btn btn-primary"%>
+
+<% end %>
+
