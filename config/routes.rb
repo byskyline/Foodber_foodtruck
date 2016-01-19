@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get "welcome/say_hello" =>"welcome#say"
   get "welcome" =>"welcome#index"
-  root :to => "welcome#index"
+  root :to => "food_trucks#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
