@@ -1,3 +1,5 @@
+json.data do
+
 json.array!(@food_trucks) do |food_truck|
 
   json.id                      food_truck.id
@@ -11,6 +13,7 @@ json.array!(@food_trucks) do |food_truck|
   json.foods do
     json.array!(food_truck.foods) do |food|
       json.id                  food.id
+      json.food_truck_id       food.food_truck_id
       json.name                food.name
       json.price               food.price
       json.picture_thumb       food.picture(:thumb)
@@ -20,7 +23,4 @@ json.array!(@food_trucks) do |food_truck|
   end
 end
 
-
-
-
-
+end
