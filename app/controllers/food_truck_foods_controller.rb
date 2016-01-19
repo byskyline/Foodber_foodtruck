@@ -1,4 +1,5 @@
-class FoodTrucksFoodsController < ApplicationController
+class FoodTruckFoodsController < ApplicationController
+  class FoodTruckFoodsController < ApplicationController
 
   before_action :set_food_truck
   def index
@@ -58,4 +59,6 @@ class FoodTrucksFoodsController < ApplicationController
   def set_food_truck
     @food_truck = FoodTruck.find(params[:food_truck_id])
   end
+end
+
 end

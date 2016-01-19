@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :food_trucks do
-  resources :foods, :controller => 'food_trucks_foods'
+    resources :foods, :controller => 'food_truck_foods'
   end
 
   get "welcome/say_hello" =>"welcome#say"
