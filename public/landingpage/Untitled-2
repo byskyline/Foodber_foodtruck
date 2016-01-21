@@ -1,0 +1,51 @@
+    var Taipei = {lat: 25.0638929, lng: 121.547199};
+    
+
+
+      var truck_image = { 
+        url: '<%= asset_path('Food Truck.png') %>'
+      };
+
+      var contentString = '<div id="content">'+
+      "Hi~I'm a Food Truck"+
+      '</div>';
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      var marker = new google.maps.Marker({
+            position: {lat: 25.0638929, lng: 121.547199},
+            map: map,
+            icon: truck_image
+          });
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+      
+      
+      
+      
+      latlng,
+      
+      
+      
+          <article>
+       <span id="status"></span>
+    </article>
+    
+    
+    
+    25.044561,121.561351
+    
+    25.044125,121.529408
+    
+    25.053825,121.547153
+    
+    
+    
+    25.045573,121.527123
+    25.044280,121.532208
+    25.049082,121.532015
+    
