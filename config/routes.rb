@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
     resources :food_trucks # ApiV1::FoodTrucksController
+    resources :foods
   end
 
   get "welcome/say_hello" =>"welcome#say"
