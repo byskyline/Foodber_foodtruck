@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'kaminari'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem "rails-i18n"
 gem 'pg'
 gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
