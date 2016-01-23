@@ -10,43 +10,113 @@
 
 </head>
 <body>
-<h1>Foodber</h1>
+  <h1>Foodber</h1>
 
-<p><%= image_tag "logo.png", size: "1100x600" %></p>
+  <p><%= image_tag "logo.png", size: "1100x600" %></p>
 
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d903.6668711740913!2d121.53056172920255!3d25.045356114002708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a97b582d5a73%3A0x9b1e56ab48807d62!2z5LiJ5Ym15pW45L2N55Sf5rS75ZyS5Y2A!5e0!3m2!1szh-TW!2stw!4v1452949010272" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+  <!-- ================================================= Google Map =================================================  -->
+
+  <div id="map" style="height:450px;"></div>
+  <script type="text/javascript">
+
+    var map;
+    var Taipei = {lat: 25.0638929, lng: 121.547199};
+
+    function initMap() {
+
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: Taipei,
+        zoom: 13
+      });
+
+      var truck_image = { 
+        url: '<%= asset_path('Food Truck.png') %>'
+      };
+
+      $.ajax({
+
+        type: "GET",
+
+        url:"http://localhost:3000/food_trucks.json",
+
+        success: function(data, textStatus, jqXHR) {
+
+          for (var i = 0; i < data.length; i++) {
+
+            var current_position = { lat: data[i].latitude, lng: data[i].longitude };
+
+            var marker = new google.maps.Marker({
+
+              position: current_position,
+              map: map,
+              icon: truck_image
+            });
+
+            var food_truck_infowindow = new google.maps.InfoWindow({
+              pixelOffset: new google.maps.Size(10, 0),
+              content: data[i].name
+            });
+
+            food_truck_infowindow.open(map, marker);
+
+            attachInstructionText( food_truck_infowindow, marker, data[i].name, map, current_position );
+
+          }
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          alert("Error=" + errorThrown);
+        }
+      });
+    }
+
+    function attachInstructionText(stepDisplay, marker, text, map, position) {
+      google.maps.event.addListener(marker, 'click', function() {
+
+        stepDisplay.setContent(text);
+        stepDisplay.open(map, marker);
+        //map.setCenter( position );
+      });
+    }
+
+ </script>
+ <script async defer
+ src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSyDDHzZHU1KEDq_t_rClDOTK7YEWHU1FloE&callback=initMap">
+</script>
+
+<!-- ================================================= Google Map End ================================================= -->
 
 <table class="table">
 
-    <tr>
-      <td>餐車名稱</td>
-      <td>Longitude</td>
-      <td>Latitude</td>
-      <td>餐車圖片</td>
-      <td>餐車餐點詳細內容</td>
-      <td>其他功能</td>
-    </tr>
+  <tr>
+    <td>餐車名稱</td>
+    <td>Latitude</td>
+    <td>Longitude</td>
+    <td>餐車圖片</td>
+    <td>餐車餐點詳細內容</td>
+    <td>其他功能</td>
+  </tr>
 
 
   <tr>
     <% @food_trucks.each do |f| %>
 
-        <td><%= f.name %></td>
-        <td><%= f.longitude %></td>
-        <td><%= f.latitude %></td>
-        <td>
-         <% if f.picture.exists? %>
-          <%= image_tag(f.picture.url(:medium))%>
-         <% else %>
-          None
-         <% end %>
-        </td>
-        <td><%= link_to '更多詳情', food_truck_foods_path(f)%></td>
-        <td><%= link_to 'Show', food_truck_path(f) , :class=> "btn btn-primary"%></td>
-        <td><%= link_to 'Edit', edit_food_truck_path(f), :class=> "btn btn-default" %></td>
-        <td><%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger" %></td>
-      </tr>
-    <% end %>
+    <td><%= f.name %></td>
+    <td><%= f.latitude %></td>
+    <td><%= f.longitude %></td>
+    <td>
+     <% if f.picture.exists? %>
+     <%= image_tag(f.picture.url(:medium))%>
+     <% else %>
+     None
+     <% end %>
+   </td>
+   <td><%= link_to '更多詳情', food_truck_foods_path(f)%></td>
+   <td><%= link_to 'Show', food_truck_path(f) , :class=> "btn btn-primary"%></td>
+   <td><%= link_to 'Edit', edit_food_truck_path(f), :class=> "btn btn-default" %></td>
+   <td><%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger" %></td>
+ </tr>
+ <% end %>
 
 </table>
 
@@ -55,11 +125,13 @@
 <p><%= link_to '新增餐車', new_food_truck_path,:class=>"btn btn-primary" %></p>
 
 
-  <ul class="pagination">
+<ul class="pagination">
 
-    <li><a href=" <%=paginate @food_trucks %>"></a></li>
+  <li>
+    <a href="<%=paginate @food_trucks %>"></a>
+  </li>
 
-  </ul>
+</ul>
 
 <%= paginate @food_trucks %>
 

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
   resources :food_trucks do
     resources :foods, :controller => 'food_trucks_foods'
   end
@@ -7,9 +9,10 @@ Rails.application.routes.draw do
     resources :food_trucks # ApiV1::FoodTrucksController
   end
 
-  get "welcome/say_hello" =>"welcome#say"
-  get "welcome" =>"welcome#index"
-  root :to => "welcome#index"
+  #get "welcome/say_hello" =>"welcome#say"
+  #get "welcome" =>"welcome#index"
+
+  root :to => "food_trucks#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

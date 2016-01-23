@@ -23,16 +23,20 @@
 
 
   <div class="form-group">
-    <%= f.label :name ,"餐車名稱： "%>
+    <%= f.label :name ,"餐車名稱: "%>
     <%= f.text_field :name ,:class => "form-control"%>
   </div>
-  <div class="form-group">
-    <%= f.label :longitude %>
-    <%= f.text_field :longitude , :class => "form-control"%>
+  <div>
+    <%= f.label :email,"使用者Email: " %>
+    <%= f.text_field :email, :class => "form-control"%>
   </div>
   <div class="form-group">
     <%= f.label :latitude %>
     <%= f.text_field :latitude , :class => "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :longitude %>
+    <%= f.text_field :longitude , :class => "form-control"%>
   </div>
   <div class="form-group">
     <%= f.file_field :picture %><br>
