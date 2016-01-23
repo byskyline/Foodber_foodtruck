@@ -16,6 +16,7 @@ json.data do
         json.food_truck_id       food.food_truck_id
         json.name                food.name
         json.price               food.price
+        json.quantity            food.quantity
         json.picture_thumb       food.picture(:thumb)
         json.picture_medium      food.picture(:medium)
         json.picture_large       food.picture(:large)

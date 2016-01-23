@@ -52,7 +52,7 @@ class FoodTrucksFoodsController < ApplicationController
   protected
 
   def food_params
-    params.require(:food).permit(:name ,:price,:picture)
+    params.require(:food).permit(:name ,:price,:picture ,:quantity)
   end
 
   def set_food_truck

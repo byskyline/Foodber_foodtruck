@@ -3,13 +3,13 @@
 <h2><%= @food_truck.name %></h2>
 
 <h2><%= @food.name %></h2>
-<h2><%= @food.price %></h2>
+<h2>NTD.<%= @food.price %>元</h2>
 <p>
   <% if @food.picture.exists? %>
-    <%= image_tag(@food.picture.url)%>
+    <%= image_tag(@food.picture.url(:medium))%>
   <% else %>
     None
   <% end %>
 </p>
-
+<h2><%= @food.quantity %><h2>
 <%= link_to "Back to index" ,food_truck_foods_path(@food_truck), :class =>"btn btn-primary" %>

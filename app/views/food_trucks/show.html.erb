@@ -18,7 +18,7 @@
 </p>
 <p>
   <% if @food_truck.picture.exists? %>
-    <%= image_tag(@food_truck.picture.url)%>
+    <%= image_tag(@food_truck.picture.url(:medium))%>
   <% else %>
     None
   <% end %>
