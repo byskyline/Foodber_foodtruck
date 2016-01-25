@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :foods
   end
 
+  #match "landingpage" => redirect("landingpage/index/")
   get "welcome/say_hello" =>"welcome#say"
   get "welcome" =>"welcome#index"
   #get "welcome/say_hello" =>"welcome#say"
