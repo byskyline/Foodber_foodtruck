@@ -59,7 +59,14 @@
 
             food_truck_infowindow.open(map, marker);
 
-            attachInstructionText( food_truck_infowindow, marker, data[i].name, map, current_position );
+            // attachInstructionText( food_truck_infowindow, marker, data[i].name, map, current_position );
+
+            google.maps.event.addListener(marker, 'click', function() {
+
+              food_truck_infowindow.setContent(data[i].name);
+              food_truck_infowindow.open(map, marker);
+        //map.setCenter( position );
+      });
 
           }
 
@@ -68,20 +75,20 @@
           alert("Error=" + errorThrown);
         }
       });
-    }
+}
 
-    function attachInstructionText(stepDisplay, marker, text, map, position) {
-      google.maps.event.addListener(marker, 'click', function() {
+function attachInstructionText(stepDisplay, marker, text, map, position) {
+  google.maps.event.addListener(marker, 'click', function() {
 
-        stepDisplay.setContent(text);
-        stepDisplay.open(map, marker);
+    stepDisplay.setContent(text);
+    stepDisplay.open(map, marker);
         //map.setCenter( position );
       });
-    }
+}
 
- </script>
- <script async defer
- src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSyDDHzZHU1KEDq_t_rClDOTK7YEWHU1FloE&callback=initMap">
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSyDDHzZHU1KEDq_t_rClDOTK7YEWHU1FloE&callback=initMap">
 </script>
 
 <!-- ================================================= Google Map End ================================================= -->
@@ -99,31 +106,37 @@
 
 
   <tr>
+    <% if current_user %>
     <% @food_trucks.each do |f| %>
 
     <td><%= f.name %></td>
     <td><%= f.latitude %></td>
     <td><%= f.longitude %></td>
     <td>
-     <% if f.picture.exists? %>
-     <%= image_tag(f.picture.url(:medium))%>
-     <% else %>
-     None
-     <% end %>
-   </td>
-   <td><%= link_to '更多詳情', food_truck_foods_path(f)%></td>
-   <td><%= link_to 'Show', food_truck_path(f) , :class=> "btn btn-primary"%></td>
-   <td><%= link_to 'Edit', edit_food_truck_path(f), :class=> "btn btn-default" %></td>
-   <td><%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger" %></td>
- </tr>
- <% end %>
+      <% if f.picture.exists? %>
+      <%= image_tag(f.picture.url(:medium))%>
+      <% else %>
+      None
+      <% end %>
+    </td>
+    <td><%= link_to '更多詳情', food_truck_foods_path(f)%></td>
+    <td><%= link_to 'Show', food_truck_path(f) , :class=> "btn btn-primary"%></td>
+    <td><%= link_to 'Edit', edit_food_truck_path(f), :class=> "btn btn-default" %></td>
+    <td><%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger" %></td>
+    <% if current_user.email == f.email %>
+    <td><%= link_to 'Open', food_truck_path(f) , :class=> "btn btn-primary"%></td>
+    <% end %>
+  </tr>
+
+  <% end %><!-- End Each-->
 
 </table>
 
 <br>
 
+<% if current_user.email == 'wei1208@livemail.tw' %>
 <p><%= link_to '新增餐車', new_food_truck_path,:class=>"btn btn-primary" %></p>
-
+<% end %>
 
 <ul class="pagination">
 
@@ -134,6 +147,6 @@
 </ul>
 
 <%= paginate @food_trucks %>
-
+<% end %> <!-- End current_ -->
 </body>
 </html>

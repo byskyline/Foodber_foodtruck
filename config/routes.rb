@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   end
 
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
+
+    post "login" => "auth#login" # POST /api/v1/login
+    post "logout" => "auth#logout"
+
     resources :food_trucks # ApiV1::FoodTrucksController
   end
 

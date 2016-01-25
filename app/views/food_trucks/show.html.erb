@@ -17,6 +17,10 @@
   <%= @food_truck.latitude %>
 </p>
 <p>
+  <strong>Email:</strong>
+  <%= @food_truck.email %>
+</p>
+<p>
   <% if @food_truck.picture.exists? %>
     <%= image_tag(@food_truck.picture.url)%>
   <% else %>
