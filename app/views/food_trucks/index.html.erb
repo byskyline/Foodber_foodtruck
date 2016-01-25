@@ -29,7 +29,7 @@
         zoom: 13
       });
 
-      var truck_image = { 
+      var truck_image = {
         url: '<%= asset_path('Food Truck.png') %>'
       };
 
@@ -134,7 +134,7 @@ src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSy
 
 <br>
 
-<% if current_user.email == 'wei1208@livemail.tw' %>
+<% if current_user.email == 'wei1208@livemail.tw'||'milemaple2158@yahoo.com.tw' %>
 <p><%= link_to '新增餐車', new_food_truck_path,:class=>"btn btn-primary" %></p>
 <% end %>
 
