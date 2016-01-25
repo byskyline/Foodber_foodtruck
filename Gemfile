@@ -27,6 +27,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem "rails-i18n"
 gem 'pg'
 gem 'rails_12factor', group: :production
+gem 'devise'
+gem 'omniauth-facebook'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

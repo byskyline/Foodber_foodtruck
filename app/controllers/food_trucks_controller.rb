@@ -4,7 +4,15 @@ class FoodTrucksController < ApplicationController
   # GET /food_trucks
   # GET /food_trucks.json
   def index
-    @food_trucks = FoodTruck.page(params[:page]).per(3)
+    if current_user
+      if current_user.email == 'wei1208@livemail.tw'
+      @food_trucks = FoodTruck.page(params[:page]).per(3)
+      elsif @food_trucks = FoodTruck.where( email: current_user.email ).page(params[:page]).per(3)
+      else @food_trucks = nil
+      end
+    end
+
+      
   end
 
   # GET /food_trucks/1
@@ -73,6 +81,6 @@ class FoodTrucksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def food_truck_params
-      params.require(:food_truck).permit(:name, :longitude, :latitude,:picture)
+      params.require(:food_truck).permit(:name, :longitude, :latitude, :picture, :email)
     end
 end

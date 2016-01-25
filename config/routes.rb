@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
   resources :food_trucks do
     resources :foods, :controller => 'food_trucks_foods'
   end
 
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
+
+    post "login" => "auth#login" # POST /api/v1/login
+    post "logout" => "auth#logout"
+
     resources :food_trucks # ApiV1::FoodTrucksController
     resources :foods
   end
 
   get "welcome/say_hello" =>"welcome#say"
   get "welcome" =>"welcome#index"
+  #get "welcome/say_hello" =>"welcome#say"
+  #get "welcome" =>"welcome#index"
+
   root :to => "food_trucks#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
