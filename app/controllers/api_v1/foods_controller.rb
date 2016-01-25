@@ -11,7 +11,6 @@ class ApiV1::FoodsController < ApplicationController
   def index
     @foods = Food.page( params[:page] )
       respond_to do |format|
-        format.html
         format.json
       end
     # index.json.jbuilder
