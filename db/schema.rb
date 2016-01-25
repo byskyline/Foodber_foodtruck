@@ -41,6 +41,33 @@ ActiveRecord::Schema.define(version: 20160125064147) do
 
   add_index "foods", ["food_truck_id"], name: "index_foods_on_food_truck_id"
 
+  create_table "lineitems", force: :cascade do |t|
+    t.integer  "food_id",    null: false
+    t.integer  "order_id",   null: false
+    t.integer  "quantity",   null: false
+    t.decimal  "unit_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "lineitems", ["order_id"], name: "index_lineitems_on_order_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "food_truck_id"
+    t.string   "name"
+    t.string   "address"
+    t.string   "phone"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.integer  "amount"
+    t.string   "status"
+    t.string   "payment_status"
+    t.string   "shipping_status"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -56,8 +83,8 @@ ActiveRecord::Schema.define(version: 20160125064147) do
     t.datetime "updated_at",                          null: false
     t.string   "fb_uid"
     t.string   "fb_token"
-    t.string   "name"
     t.string   "authentication_token"
+    t.string   "name"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true
