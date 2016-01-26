@@ -27,6 +27,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem "rails-i18n"
 # gem 'pg'
 # gem 'rails_12factor', group: :production
+gem 'mysql2', "~> 0.3.20"
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'rest-client'
