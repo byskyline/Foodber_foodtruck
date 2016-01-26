@@ -25,11 +25,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'kaminari'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "rails-i18n"
-gem 'pg'
-gem 'rails_12factor', group: :production
+# gem 'pg'
+# gem 'rails_12factor', group: :production
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'rest-client'
+gem 'capistrano-rails', :group => :development
+gem 'capistrano-passenger', :group => :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
