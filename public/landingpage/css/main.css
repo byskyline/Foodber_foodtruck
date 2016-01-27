@@ -1110,6 +1110,7 @@ footer h3 {
 }
 footer p {
 	margin: 12px 0;
+	color: white;
 }
 
 footer .footer-about {
@@ -1532,7 +1533,7 @@ hr {
 /* l. Portfolio Section
 /* =================================================================== */
 #portfolio {
-	background: white;
+	background: #ecf0f1;
 	padding-top: 120px;
   padding-bottom: 50px;
 }
