@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  resources :food_trucks do
-    resources :foods, :controller => 'food_trucks_foods'
-  end
-
   scope :path => '/api/v1/', :module => "api_v1", :as => 'v1', :defaults => { :format => :json } do
 
     post "login" => "auth#login" # POST /api/v1/login
@@ -19,6 +15,18 @@ Rails.application.routes.draw do
   get "welcome" =>"welcome#index"
   #get "welcome/say_hello" =>"welcome#say"
   #get "welcome" =>"welcome#index"
+
+
+  #namespace :admin do
+  #  resources :food_trucks do
+  #    resources :foods, :controller => 'food_trucks_foods'
+  #  end
+  #  root :to => "food_trucks#index"
+  #end
+
+  resources :food_trucks do
+    resources :foods, :controller => 'food_trucks_foods'
+  end
 
   root :to => "food_trucks#index"
   # The priority is based upon order of creation: first created -> highest priority.
