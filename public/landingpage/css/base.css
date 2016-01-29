@@ -1,22 +1,22 @@
 /* =================================================================== */
-/* 
+/*
 /*  Puremedia v1.0 Base Stylesheet
 /*  url:styleshout.com
 /*  10-09-2014
 /*
-/*  ------------------------------------------------------------------ 
-  
-    TOC: 
+/*  ------------------------------------------------------------------
+
+    TOC:
     a. Reset
     b. Basic Setup Styles
-    c. Typography  
+    c. Typography
     d. Media
     e. Grid
     f. MISC
-  
+
 /* =================================================================== */
 
-/* 
+/*
 /* a. Reset - normalize.css v3.0.1 | MIT License | git.io/normalize
 /* =================================================================== */
 html {
@@ -164,7 +164,7 @@ td, th {
 	padding: 0;
 }
 
-/* 
+/*
 /* b. Basic Setup Styles - Top Elements
 /* =================================================================== */
 *, *:before, *:after {
@@ -176,6 +176,7 @@ html {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 62.5%;
+	min-width: 300px;
 }
 body {
 	font-weight: normal;
@@ -183,7 +184,7 @@ body {
 	text-rendering: optimizeLegibility;
 }
 
-/* 
+/*
 /* c. Typography
 ====================================================================== */
 div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, p, blockquote, th, td {
@@ -254,7 +255,7 @@ p a, p a:visited {
 	line-height: inherit;
 }
 
-/* 
+/*
 /* d. Media
 /* =================================================================== */
 img, video, embed, object {
@@ -268,7 +269,7 @@ img {
 	-ms-interpolation-mode: bicubic;
 }
 
-/* 
+/*
 /* e. Grid
 ===================================================================== */
 .row {
@@ -570,7 +571,7 @@ different heights to align properly. */
 	}
 }
 
-/* 
+/*
 /* f. MISC
 ===================================================================== */
 
