@@ -11,6 +11,11 @@ class ApiV1::AuthController < ApiController
     elsif params[:access_token]
       fb_data = User.get_fb_data( params[:access_token] )
       if fb_data
+
+        if fb_data["email"] == nil
+          fb_data["email"] = "YourEmailDidNotGet@facebook.com"
+        end
+
         auth_hash = OmniAuth::AuthHash.new({
           uid: fb_data["id"],
           info: {

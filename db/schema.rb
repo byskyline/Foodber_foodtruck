@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125064147) do
+ActiveRecord::Schema.define(version: 20160128175730) do
 
   create_table "food_trucks", force: :cascade do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160125064147) do
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
     t.string   "email"
+    t.string   "get_order"
   end
 
   create_table "foods", force: :cascade do |t|
@@ -41,31 +42,27 @@ ActiveRecord::Schema.define(version: 20160125064147) do
 
   add_index "foods", ["food_truck_id"], name: "index_foods_on_food_truck_id"
 
-  create_table "lineitems", force: :cascade do |t|
+  create_table "line_items", force: :cascade do |t|
     t.integer  "food_id",    null: false
     t.integer  "order_id",   null: false
-    t.integer  "quantity",   null: false
-    t.decimal  "unit_price"
+    t.integer  "qty",        null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "lineitems", ["order_id"], name: "index_lineitems_on_order_id"
+  add_index "line_items", ["order_id"], name: "index_line_items_on_order_id"
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "food_truck_id"
+    t.string   "food_truck_id"
     t.string   "name"
-    t.string   "address"
     t.string   "phone"
     t.float    "longitude"
     t.float    "latitude"
     t.integer  "amount"
     t.string   "status"
     t.string   "payment_status"
-    t.string   "shipping_status"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,8 +80,8 @@ ActiveRecord::Schema.define(version: 20160125064147) do
     t.datetime "updated_at",                          null: false
     t.string   "fb_uid"
     t.string   "fb_token"
-    t.string   "authentication_token"
     t.string   "name"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true

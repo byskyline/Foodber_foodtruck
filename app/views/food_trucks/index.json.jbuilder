@@ -1,4 +1,4 @@
-json.array!(@food_trucks) do |food_truck|
+json.array!(@food_trucks_for_all) do |food_truck|
 
   json.id                      food_truck.id
   json.name                    food_truck.name

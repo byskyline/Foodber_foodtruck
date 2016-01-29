@@ -1,0 +1,40 @@
+Searching 590 files for "localhost"
+
+/Users/jameswei/alphaCamp/Foodber_foodtruck/app/views/food_trucks/driver.html.erb:
+   64              beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+   65              type: "POST",
+   66:             url:"http://localhost:3000<%=location_upload_food_truck_path%>",
+   67              //+"?&authenticity_token="+<%=current_user.authentication_token%>,
+   68  
+   ..
+   97    $.ajax({
+   98     type: "POST",
+   99:    url: "http://localhost:3000<%=get_order_food_truck_path%>",
+  100     success: function(data){
+  101        if( data['get_order'] == '1' ){
+
+/Users/jameswei/alphaCamp/Foodber_foodtruck/app/views/layouts/application.html.erb:
+   26  		<li><a><%= current_user.name %>,您好</a></li>
+   27  		<li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
+   28: 		<li><a href="https://www.facebook.com/logout.php?access_token=<%= current_user.fb_token %>&confirm=1&next=http://localhost:3000/">FB登出</a>
+   29  		</li>
+   30  			<!--
+
+/Users/jameswei/alphaCamp/Foodber_foodtruck/config/environments/development.rb:
+   40    # config.action_view.raise_on_missing_translations = true
+   41  
+   42:   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+   43  
+   44  end
+
+/Users/jameswei/alphaCamp/Foodber_foodtruck/config/environments/production.rb:
+   78    config.active_record.dump_schema_after_migration = false
+   79  
+   80:   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+   81  end
+   82  
+
+~/alphaCamp/Foodber_foodtruck/log/development.log:
+    <binary>
+
+290 matches across 5 files

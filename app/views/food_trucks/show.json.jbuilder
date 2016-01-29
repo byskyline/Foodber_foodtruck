@@ -1,3 +1,3 @@
-json.extract! @food_truck, :id, :name, :longitude, :latitude, :created_at, :updated_at, :foods
+json.extract! @food_trucks_for_all, :id, :name, :longitude, :latitude, :created_at, :updated_at, :foods
 
 
