@@ -1,5 +1,5 @@
 /* =================================================================== */
-/* 
+/*
 /*  Puremedia v1.0 Media Queries
 /*  url:styleshout.com
 /*  10-10-2014
@@ -48,7 +48,7 @@
 	header {	height: 60px; }
 	header .logo {	margin: 24px 0 0 0; }
 	header .logo a { margin-right: 0; }
-	
+
 	/* mobile navigation */
 	#nav-wrap {
 		z-index: 991;
@@ -92,7 +92,7 @@
 		left: auto;
 		background: white;
 	}
-	#nav-wrap .menu-icon:before, 
+	#nav-wrap .menu-icon:before,
 	#nav-wrap .menu-icon:after {
 		content: '';
 		width: 100%;
@@ -152,7 +152,7 @@
 	.js #nav-wrap a#toggle-btn {
 		display: block;
 	}
-	.no-js #nav-wrap:not(:target) > a:first-of-type, 
+	.no-js #nav-wrap:not(:target) > a:first-of-type,
 	.no-js #nav-wrap:target > a:last-of-type {
 		display: block;
 	}
@@ -161,7 +161,7 @@
 	}
 
 	/* content styles */
-	#content { padding-top: 54px;	} 
+	#content { padding-top: 54px;	}
 	#content #sidebar {
 		margin-top: 42px;
 		padding-left: 0;
@@ -169,7 +169,7 @@
 
 	/* sidebar styles */
 	#sidebar .link-list {
-		margin-left: -3px; 
+		margin-left: -3px;
 	}
 	#sidebar .link-list li {
 		display: inline-block;
@@ -177,7 +177,7 @@
 	}
 	#sidebar .link-list li a {
 		display: inline-block;
-		white-space: nowrap;		
+		white-space: nowrap;
 	}
 	#sidebar .link-list li:before {
 		content: "|";
@@ -210,7 +210,7 @@
 	footer #go-top a i {	font-size: 16px; }
 
 	/* common and shared styles */
-	.section-head p {	width: 100%; } 
+	.section-head p {	width: 100%; }
 	#page-title h1 {
 		font: 46px/1.3 "raleway-bold", sans-serif;
 		width: 100%;
@@ -242,13 +242,13 @@
 	/* blog entry */
 	.entry p.lead {
 		font: 16px/33px "merriweather-light", sans-serif;
-	} 
+	}
 	#comments h3 {	text-align: center; }
 	#comments form {
 		margin-left: 0;
 		border-bottom: 1px solid white;
 	}
-	#comments form input, #comments form textarea, 
+	#comments form input, #comments form textarea,
 	#comments form select, #comments form label {
 		width: 100%;
 		float: none;
@@ -355,14 +355,14 @@
 	/* about section */
 	#team-wrapper .member-pic {
 		width: 60px;
-		height: 60px;	
-		margin-top: -30px;			
+		height: 60px;
+		margin-top: -30px;
 	}
 	#team-wrapper .member-name { margin-left: 60px;	}
 	#team-wrapper .member-name h3 {
 		font-size: 15px;
-		line-height: 18px;	
-		margin-bottom: 12px;	
+		line-height: 18px;
+		margin-bottom: 12px;
 	}
 
 } /* 480 */
@@ -370,7 +370,7 @@
 
 @media only screen and (max-width:460px) {
 
-	/*	footer styles */ 
+	/*	footer styles */
 	footer .right-cols .columns {
 		width: 100% !important;
 	}
@@ -422,6 +422,7 @@
 	footer .copyright { padding-left: 0; }
 
 	/* hero section */
+	#hero { background:#12151b; }
 	#hero-slider {	width: 100%; }
 	#hero-slider .flex-caption h1 {
 		font: 32px/1.3 "raleway-semibold", sans-serif;
