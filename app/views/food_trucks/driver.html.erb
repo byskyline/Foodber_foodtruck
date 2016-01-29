@@ -98,8 +98,8 @@ refreshInterval = setInterval(function() {
   $.ajax({
    type: "POST",
    
-   url: "http://localhost:3000<%=get_order_food_truck_path%>",
-   //url: "http://www.foodber.space<%=get_order_food_truck_path%>",
+   //url: "http://localhost:3000<%=get_order_food_truck_path%>",
+   url: "http://www.foodber.space<%=get_order_food_truck_path%>",
 
    success: function(data){
       if( data['get_order'] == '1' ){
