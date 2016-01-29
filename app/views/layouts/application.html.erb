@@ -26,9 +26,9 @@
 		<li><a><%= current_user.name %>,您好</a></li>
 		<li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
 		
-		<!-- <li><a href="https://www.facebook.com/logout.php?access_token=<%= current_user.fb_token %>&confirm=1&next=http://localhost:3000/">FB登出</a> -->
+		<li><a href="https://www.facebook.com/logout.php?access_token=<%= current_user.fb_token + "&confirm=1&" + "next=" + root_url %>">FB登出</a>
 		
-		<li><a href="https://www.facebook.com/logout.php?access_token=<%= current_user.fb_token %>&confirm=1&next=http://www.foodber.space/">FB登出</a>
+		<!-- <li><a href="https://www.facebook.com/logout.php?access_token=<%= current_user.fb_token %>&next=<%= root_url %>">FB登出</a> -->
 
 		</li>
 			<!--

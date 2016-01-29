@@ -65,7 +65,7 @@
             type: "POST",
 
             //url:"http://localhost:3000<%=location_upload_food_truck_path%>",
-            url:"http://www.foodber.space/<%=location_upload_food_truck_path%>"
+            url:"<%=location_upload_food_truck_url%>",
             
             data: { food_truck: current_pos_for_rails },// product: { name: "Filip", description: "whatever" }
 
@@ -88,8 +88,7 @@
     }
 
   </script>
-
-  <script async defer
+<script async defer
   src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSyDDHzZHU1KEDq_t_rClDOTK7YEWHU1FloE&callback=initMap">
 </script>
 
@@ -99,7 +98,7 @@ refreshInterval = setInterval(function() {
    type: "POST",
    
    //url: "http://localhost:3000<%=get_order_food_truck_path%>",
-   url: "http://www.foodber.space<%=get_order_food_truck_path%>",
+   url: "<%=get_order_food_truck_url%>",
 
    success: function(data){
       if( data['get_order'] == '1' ){

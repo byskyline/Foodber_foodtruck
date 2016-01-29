@@ -6,7 +6,7 @@ class FoodTrucksController < ApplicationController
   # GET /food_trucks.json
   def index
     if current_user
-      if current_user.email == ('wei1208@livemail.tw' || 'milemaple2158@yahoo.com.tw') 
+      if current_user.email == 'wei1208@livemail.tw' || current_user.email == 'milemaple2158@yahoo.com.tw'
       @food_trucks_for_all = FoodTruck.all
       @food_trucks = FoodTruck.page(params[:page]).per(10)
       elsif @food_trucks = FoodTruck.where( email: current_user.email ).page(params[:page]).per(3)
