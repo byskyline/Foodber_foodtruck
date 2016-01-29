@@ -1,4 +1,4 @@
-class ApiV1::FoodsController < ApplicationController
+class ApiV1::FoodsController < ApiController
 
  # GET /api/v1/foods/:id
   def show

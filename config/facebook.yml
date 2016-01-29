@@ -1,11 +1,11 @@
 development:
-  app_id: '718443621619588'
-  secret: d7a6e68f87995c5b3f8ff7fdc55886e7
+  app_id: '1685279468416267'
+  secret: d91307917ebd4dbbe0c276efe51d7b6e
 
 test:
-  app_id: '718443621619588'
-  secret: d7a6e68f87995c5b3f8ff7fdc55886e7
+  app_id: '1685279468416267'
+  secret: d91307917ebd4dbbe0c276efe51d7b6e
 
 production:
-  app_id: '718443621619588'
-  secret: d7a6e68f87995c5b3f8ff7fdc55886e7
+  app_id: '1685279468416267'
+  secret: d91307917ebd4dbbe0c276efe51d7b6e

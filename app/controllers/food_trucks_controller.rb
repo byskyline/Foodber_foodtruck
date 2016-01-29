@@ -1,18 +1,18 @@
 class FoodTrucksController < ApplicationController
-  before_action :set_food_truck, only: [:show, :edit, :update, :destroy]
+  before_action :set_food_truck, only: [:show, :edit, :update, :destroy, :driver, :location_upload]
 
+  skip_before_action :verify_authenticity_token, only: [:get_order]
   # GET /food_trucks
   # GET /food_trucks.json
   def index
     if current_user
-      if current_user.email == 'wei1208@livemail.tw' || 'milemaple2158@yahoo.com.tw'
-      @food_trucks = FoodTruck.page(params[:page]).per(3)
+      if current_user.email == ('wei1208@livemail.tw' || 'milemaple2158@yahoo.com.tw') 
+      @food_trucks_for_all = FoodTruck.all
+      @food_trucks = FoodTruck.page(params[:page]).per(10)
       elsif @food_trucks = FoodTruck.where( email: current_user.email ).page(params[:page]).per(3)
       else @food_trucks = nil
       end
     end
-
-
   end
 
   # GET /food_trucks/1
@@ -73,6 +73,40 @@ class FoodTrucksController < ApplicationController
     end
   end
 
+  def driver
+  end
+
+  def location_upload
+    @food_truck.latitude = food_truck_position_params[:latitude]
+    @food_truck.longitude = food_truck_position_params[:longitude]
+
+    if @food_truck.save
+      redirect_to driver_food_truck_path(@food_truck)
+    end
+  end
+
+  def get_order
+
+    @food_truck = FoodTruck.find(order_params[:id])
+
+    if order_params[:get_order]
+      @food_truck.get_order = '1'
+      @food_truck.save!
+      respond_to do |format|
+        format.json {
+          render :json => { :get_order => @food_truck.get_order }
+        }
+      end
+    else
+      respond_to do |format|
+        format.json {
+          render :json => { :get_order => @food_truck.get_order }
+        }
+      end
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_food_truck
@@ -83,4 +117,13 @@ class FoodTrucksController < ApplicationController
     def food_truck_params
       params.require(:food_truck).permit(:name, :longitude, :latitude, :picture, :email)
     end
+
+    def food_truck_position_params
+      params.require(:food_truck).permit(:latitude, :longitude)
+    end
+
+    def order_params
+      params.permit(:get_order, :id)
+    end
+      
 end

@@ -16,31 +16,34 @@
 </head>
 <body>
 
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
-	<div class="container">
+<div class="container">
 
-		<ul class="nav nav-pills">
-			<% if current_user %>
-			<li><a><%= current_user.name %>,您好</a></li>
-			<li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
+	<ul class="nav nav-pills">
+		<% if current_user %>
+		<li><a><%= current_user.name %>,您好</a></li>
+		<li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
+		<li><a href="https://www.facebook.com/logout.php?access_token=<%= current_user.fb_token %>&confirm=1&next=http://localhost:3000/">FB登出</a>
+		</li>
 			<!--
 			<li><%= link_to('修改密碼', edit_registration_path(:user)) %></li>
-			-->
-			<% else %>
+		-->
+		<% else %>
 			<!--
 			<li><%= link_to('註冊', new_registration_path(:user)) %></li>
 			<li><%= link_to('登入', new_session_path(:user)) %></li>
-      -->
-			<li>
-				<%= link_to "登入 Facebook", user_omniauth_authorize_path(:facebook) %>
-			</li>
-			<% end %>
-		</ul>
+		-->
+		<li>
+			<%= link_to "登入 Facebook", user_omniauth_authorize_path(:facebook) %>
+		</li>
+		<% end %>
+	</ul>
 
-<%= yield %>
+	<%= yield %>
 
-	</div>
+</div>
+
 </body>
 </html>

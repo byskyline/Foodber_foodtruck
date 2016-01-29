@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Foodber</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-</head>
-<body>
   <h1>Foodber</h1>
 
   <p><%= image_tag "logo.png", size: "1100x600" %></p>
@@ -36,13 +25,14 @@
       $.ajax({
 
         type: "GET",
-
-        url:"https://gentle-wave-2437.herokuapp.com/food_trucks.json",
+        
+        url: "http://localhost:3000/food_trucks.json",
+        //url:"https://gentle-wave-2437.herokuapp.com/food_trucks.json",
 
         success: function(data, textStatus, jqXHR) {
 
           for (var i = 0; i < data.length; i++) {
-
+            console.log( i )
             var current_position = { lat: data[i].latitude, lng: data[i].longitude };
 
             var marker = new google.maps.Marker({
@@ -59,14 +49,7 @@
 
             food_truck_infowindow.open(map, marker);
 
-            // attachInstructionText( food_truck_infowindow, marker, data[i].name, map, current_position );
-
-            google.maps.event.addListener(marker, 'click', function() {
-
-              food_truck_infowindow.setContent(data[i].name);
-              food_truck_infowindow.open(map, marker);
-        //map.setCenter( position );
-      });
+            attachInstructionText( food_truck_infowindow, marker, data[i].name, map, current_position );
 
           }
 
@@ -87,10 +70,10 @@ function attachInstructionText(stepDisplay, marker, text, map, position) {
 }
 
 </script>
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSyDDHzZHU1KEDq_t_rClDOTK7YEWHU1FloE&callback=initMap">
-</script>
 
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSyDDHzZHU1KEDq_t_rClDOTK7YEWHU1FloE&callback=initMap">
+</script>
 <!-- ================================================= Google Map End ================================================= -->
 
 <table class="table">
@@ -122,9 +105,11 @@ src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSy
     <td><%= link_to '更多詳情', food_truck_foods_path(f)%></td>
     <td><%= link_to 'Show', food_truck_path(f) , :class=> "btn btn-primary"%></td>
     <td><%= link_to 'Edit', edit_food_truck_path(f), :class=> "btn btn-default" %></td>
-    <td><%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger" %></td>
+    <% if current_user.email == ('wei1208@livemail.tw'||'milemaple2158@yahoo.com.tw') %>
+      <td><%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger" %></td>
+    <% end %>
     <% if current_user.email == f.email %>
-    <td><%= link_to 'Open', food_truck_path(f) , :class=> "btn btn-primary"%></td>
+      <td><%= link_to 'Open', driver_food_truck_path(f) , :class=> "btn btn-primary", 'data-no-turbolink' => true %></td>
     <% end %>
   </tr>
 
@@ -134,7 +119,7 @@ src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSy
 
 <br>
 
-<% if current_user.email == 'wei1208@livemail.tw'||'milemaple2158@yahoo.com.tw' %>
+<% if current_user.email == ('wei1208@livemail.tw'||'milemaple2158@yahoo.com.tw') %>
 <p><%= link_to '新增餐車', new_food_truck_path,:class=>"btn btn-primary" %></p>
 <% end %>
 
@@ -148,5 +133,3 @@ src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSy
 
 <%= paginate @food_trucks %>
 <% end %> <!-- End current_ -->
-</body>
-</html>
