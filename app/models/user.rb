@@ -7,6 +7,11 @@ class User < ActiveRecord::Base
 
   before_create :generate_authentication_token
 
+  def admin?
+    email == 'wei1208@livemail.tw' || email == 'milemaple2158@yahoo.com.tw'
+    #self.role == "admin"
+  end
+
   def generate_authentication_token
     self.authentication_token = Devise.friendly_token
   end

@@ -1,30 +1,59 @@
+<style>
+  table, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+</style>
 <div id="map" style="height:600px;"></div>
-<div id="append"></div>
-  <script type="text/javascript">
+<div id="append">
+<table class="table" style="margin-top:10px;display:none;">
+    <tr class="success">
+      <td>訂單編號</td>
+      <td>姓名</td>
+      <td>電話</td>
+      <td>蜂蜜墨汁豬肉</td>
+      <td>雙倍起司火腿</td>
+      <td>煙火女辣味雞肉</td>
+      <td>超厚香料牛肉</td>
+      <td>接單</td>
+    </tr>
+    <tr>
+      <td>20151031567839</td>
+      <td>Yu Ta Lin</td>
+      <td>0988033475</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+<script type="text/javascript">
 
-    var map;
-    var Taipei = {lat: 25.0638929, lng: 121.547199};
-    
-    var current_pos;
-    var contentString;
-    var food_truck_infowindow;
+  var map;
+  var Taipei = {lat: 25.0638929, lng: 121.547199};
 
-    function initMap() {
+  var current_pos;
+  var contentString;
+  var food_truck_infowindow;
 
-      map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13
-      });
+  function initMap() {
 
-      var truck_image = { 
-        url: '<%= asset_path('Food Truck.png') %>'
-      };
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 13
+    });
 
-      var marker = new google.maps.Marker({
-      });
+    var truck_image = { 
+      url: '<%= asset_path('Food Truck.png') %>'
+    };
+
+    var marker = new google.maps.Marker({
+    });
 
 
-      food_truck_infowindow = new google.maps.InfoWindow({
-      });
+    food_truck_infowindow = new google.maps.InfoWindow({
+    });
 
       // Try HTML5 geolocation.
 
@@ -65,7 +94,7 @@
             type: "POST",
 
             //url:"http://localhost:3000<%=location_upload_food_truck_path%>",
-            url:"<%=location_upload_food_truck_url%>",
+            url: "<%= location_upload_food_truck_url %>",
             
             data: { food_truck: current_pos_for_rails },// product: { name: "Filip", description: "whatever" }
 
@@ -78,9 +107,9 @@
 
         }, function(){
          handleLocationError(true, food_truck_infowindow, map.getCenter());
-        });
-      } 
-      else{
+       });
+} 
+else{
         // Browser doesn't support Geolocation
         handleLocationError(false, food_truck_infowindow, map.getCenter());
       }
@@ -88,25 +117,24 @@
     }
 
   </script>
-<script async defer
+  <script async defer
   src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSyDDHzZHU1KEDq_t_rClDOTK7YEWHU1FloE&callback=initMap">
 </script>
 
 <script>
-refreshInterval = setInterval(function() { 
-  $.ajax({
-   type: "POST",
-   
+  refreshInterval = setInterval(function() { 
+    $.ajax({
+     type: "POST",
+
    //url: "http://localhost:3000<%=get_order_food_truck_path%>",
    url: "<%=get_order_food_truck_url%>",
 
    success: function(data){
-      if( data['get_order'] == '1' ){
-        console.log(data)
-        $("#append").append("<b>Appended text</b>.");
-        clearInterval(refreshInterval);
-     }
-   }
- });
-}, 3000);
+    if( data['get_order'] == '1' ){
+      $(table).show();
+      clearInterval(refreshInterval);
+    }
+  }
+});
+  }, 3000);
 </script>

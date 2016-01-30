@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get :driver
       post :location_upload
       post :get_order
+      get :check
     end
     resources :foods, :controller => 'food_trucks_foods'
   end

@@ -26,9 +26,9 @@
 
         type: "GET",
 
-        url:"<%= root_url %>food_trucks.json",
+        url: "<%= food_trucks_url( :format => :json ) %>",
 
-        success: function(data, textStatus, jqXHR) {
+        success: function(data) {
 
           for (var i = 0; i < data.length; i++) {
             console.log( i )
@@ -88,12 +88,12 @@ function attachInstructionText(stepDisplay, marker, text, map, position) {
 
 
   <tr>
-    <% if current_user %>
+
     <% @food_trucks.each do |f| %>
 
     <td><%= f.name %></td>
-    <td><%= f.latitude %></td>
-    <td><%= f.longitude %></td>
+    <td><%= f.latitude.round(4) %></td>
+    <td><%= f.longitude.round(4) %></td>
     <td>
       <% if f.picture.exists? %>
       <%= image_tag(f.picture.url(:medium))%>
@@ -104,8 +104,9 @@ function attachInstructionText(stepDisplay, marker, text, map, position) {
     <td><%= link_to '更多詳情', food_truck_foods_path(f)%></td>
     <td><%= link_to 'Show', food_truck_path(f) , :class=> "btn btn-primary"%></td>
     <td><%= link_to 'Edit', edit_food_truck_path(f), :class=> "btn btn-default" %></td>
-    <% if current_user.email == 'wei1208@livemail.tw'|| current_user.email =='milemaple2158@yahoo.com.tw'%>
+    <% if current_user.admin? %>
       <td><%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' }, :class=> "btn btn-danger" %></td>
+      <td><%= link_to 'Check', check_food_truck_path(f) , :class=> "btn btn-primary", 'data-no-turbolink' => true %></td>
     <% end %>
     <% if current_user.email == f.email %>
       <td><%= link_to 'Open', driver_food_truck_path(f) , :class=> "btn btn-primary", 'data-no-turbolink' => true %></td>
@@ -118,17 +119,10 @@ function attachInstructionText(stepDisplay, marker, text, map, position) {
 
 <br>
 
-<% if current_user.email == 'wei1208@livemail.tw'|| current_user.email =='milemaple2158@yahoo.com.tw' %>
+<% if current_user.admin? %>
 <p><%= link_to '新增餐車', new_food_truck_path,:class=>"btn btn-primary" %></p>
 <% end %>
 
-<ul class="pagination">
-
-  <li>
-    <a href="<%=paginate @food_trucks %>"></a>
-  </li>
-
-</ul>
 
 <%= paginate @food_trucks %>
-<% end %> <!-- End current_ -->
+
