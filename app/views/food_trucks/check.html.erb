@@ -1,0 +1,192 @@
+<style>
+  table, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+</style>
+<div id="map" style="height:600px;"></div>
+<div id="append">
+  <table class="table" style="margin-top:10px;display:none;">
+    <tr class="success">
+      <td>訂單編號</td>
+      <td>姓名</td>
+      <td>電話</td>
+      <td>緯度</td>
+      <td>經度</td>
+      <td>蜂蜜墨汁豬肉</td>
+      <td>雙倍起司火腿</td>
+      <td>煙火女辣味雞肉</td>
+      <td>超厚香料牛肉</td>
+      <td>確認路線</td>
+    </tr>
+    <tr>
+      <td>20151031567839</td>
+      <td>Yu Ta Lin</td>
+      <td>0988033475</td>
+      <td>25.045249</td>
+      <td>121.532838</td>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td><button id="btnaddmarker" class="btn btn-primary">顯示位置</button></td>
+    </tr>
+  </table>
+</div>
+
+<!--  Google map  -->
+<script type="text/javascript">
+
+  var map;
+  var Taipei = {lat: 25.0638929, lng: 121.547199};
+  var ac_position = {lat: 25.051501, lng: 121.532838};
+  var use_latlng = {lat:25.045249, lng:121.532838};
+  var user_infowindow;
+  var contentString;
+  
+
+  function initMap() {
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: Taipei,
+      zoom: 13
+    });
+
+    var user_marker = new google.maps.Marker({});
+    
+    user_infowindow = new google.maps.InfoWindow({});
+
+    var truck_image = {
+      url: '<%= asset_path('Food Truck.png') %>'
+    };
+
+
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+
+    directionsDisplay.setMap(map);
+
+    user_marker.addListener('click', function() {
+
+      calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+      user_infowindow.open(map, user_marker);
+
+    });
+
+    $.ajax({
+
+      type: "GET",
+
+      url: "<%= food_trucks_url( :format => :json ) %>",
+
+      success: function(data) {
+
+        for (var i = 0; i < data.length; i++) {
+
+          if( data[i].id == <%=@food_truck.id%> ){
+
+            console.log( i )
+            var current_position = { lat: data[i].latitude, lng: data[i].longitude };
+
+            var marker = new google.maps.Marker({
+
+              position: current_position,
+              map: map,
+              icon: truck_image
+            });
+
+            var food_truck_infowindow = new google.maps.InfoWindow({
+              pixelOffset: new google.maps.Size(10, 0),
+              content: data[i].name
+            });
+
+            food_truck_infowindow.open(map, marker);
+
+            attachInstructionText( food_truck_infowindow, marker, data[i].name, map, current_position );
+          }
+        }
+
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("Error=" + errorThrown);
+      }
+    });
+
+    //Add User Position
+    var use_latlng = new google.maps.LatLng(25.045249, 121.532838);
+
+    function addmarker(latilongi) {
+
+      user_marker.setOptions({
+        position: use_latlng,
+        map: map
+      });
+
+      map.setCenter(user_marker.getPosition())
+    }
+
+    $('#btnaddmarker').on('click', function() {
+      addmarker(use_latlng)
+    })
+
+  }//And initMap
+
+  function attachInstructionText(stepDisplay, marker, text, map, position) {
+    google.maps.event.addListener(marker, 'click', function() {
+
+      stepDisplay.setContent(text);
+      stepDisplay.open(map, marker);
+    });
+  }
+
+  function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    directionsService.route({
+     origin: ac_position,
+     destination: use_latlng ,
+     travelMode: google.maps.TravelMode.DRIVING
+   }, function(response, status) {
+     if (status === google.maps.DirectionsStatus.OK) {
+
+      console.log( response.routes[0].legs[0].distance.value );
+
+      contentString = "";
+
+      contentString += "約 " + (response.routes[0].legs[0].distance.value)/1000 + " 公里" + "</br>";
+      contentString += "約 " + Math.round((response.routes[0].legs[0].duration.value)/60) + "分鐘";
+
+      directionsDisplay.setOptions( { suppressMarkers: true } );
+      directionsDisplay.setDirections(response);
+
+      user_infowindow.setOptions({
+        content: contentString
+      });
+
+    } else {
+     window.alert('Directions request failed due to ' + status);
+   }
+ });
+  }
+
+</script>
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?region=cn&language=zh-TW&key=AIzaSyDDHzZHU1KEDq_t_rClDOTK7YEWHU1FloE&callback=initMap">
+</script>
+
+<script>
+  refreshInterval = setInterval(function() { 
+    $.ajax({
+     type: "POST",
+   //url: "http://localhost:3000<%=get_order_food_truck_path%>",
+   url: "<%=get_order_food_truck_url%>",
+   success: function(data){
+    console.log(data['get_order']);
+    if( data['get_order'] == '1' ){
+      $("table").show();
+      clearInterval(refreshInterval);
+    }
+  }
+});
+  }, 3000);
+</script>

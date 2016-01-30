@@ -1,36 +1,32 @@
 class FoodTrucksController < ApplicationController
-  before_action :set_food_truck, only: [:show, :edit, :update, :destroy, :driver, :location_upload]
+
+  before_action :authenticate_user!, :except => [:get_order]
+
+  before_action :set_food_truck, only: [:show, :edit, :update, :destroy, :driver, :location_upload, :check]
 
   skip_before_action :verify_authenticity_token, only: [:get_order]
   # GET /food_trucks
   # GET /food_trucks.json
   def index
-    if current_user
-      if current_user.email == 'wei1208@livemail.tw' || current_user.email == 'milemaple2158@yahoo.com.tw'
+    if current_user.admin?
       @food_trucks_for_all = FoodTruck.all
       @food_trucks = FoodTruck.page(params[:page]).per(10)
-      elsif @food_trucks = FoodTruck.where( email: current_user.email ).page(params[:page]).per(3)
-      else @food_trucks = nil
-      end
+    else
+      @food_trucks_for_all = FoodTruck.where( email: current_user.email )
+      @food_trucks = FoodTruck.where( email: current_user.email ).page(params[:page]).per(3)
     end
   end
 
-  # GET /food_trucks/1
-  # GET /food_trucks/1.json
   def show
   end
 
-  # GET /food_trucks/new
   def new
     @food_truck = FoodTruck.new
   end
 
-  # GET /food_trucks/1/edit
   def edit
   end
 
-  # POST /food_trucks
-  # POST /food_trucks.json
   def create
     @food_truck = FoodTruck.new(food_truck_params)
 
@@ -45,8 +41,6 @@ class FoodTrucksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /food_trucks/1
-  # PATCH/PUT /food_trucks/1.json
   def update
     if params[:_remove_picture] == "1"
       @food_truck.picture = nil
@@ -63,8 +57,6 @@ class FoodTrucksController < ApplicationController
     end
   end
 
-  # DELETE /food_trucks/1
-  # DELETE /food_trucks/1.json
   def destroy
     @food_truck.destroy
     respond_to do |format|
@@ -74,17 +66,25 @@ class FoodTrucksController < ApplicationController
   end
 
   def driver
+    @food_truck.get_order = '0'
+    @food_truck.save!
+  end
+
+  def check
+    @food_truck.get_order = '0'
+    @food_truck.save!
   end
 
   def location_upload
     @food_truck.latitude = food_truck_position_params[:latitude]
     @food_truck.longitude = food_truck_position_params[:longitude]
 
-    if @food_truck.save
-      redirect_to driver_food_truck_path(@food_truck)
-    end
+    @food_truck.save!
+
+    render :json => { :message => "ok" }
   end
 
+  # for API. this should move to api_v1  
   def get_order
 
     @food_truck = FoodTruck.find(order_params[:id])

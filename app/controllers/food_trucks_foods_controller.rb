@@ -1,6 +1,8 @@
 class FoodTrucksFoodsController < ApplicationController
 
+  before_action :authenticate_user!
   before_action :set_food_truck
+  
   def index
     @foods = @food_truck.foods
   end
